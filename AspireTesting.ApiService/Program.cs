@@ -1,5 +1,4 @@
 using AspireTesting.ApiService;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +34,8 @@ app.MapGet("/api/data", async (MyDbContext dbContext) =>
 
     return new { randomNumber, names };
 }).WithName("Data");
+
+// Omitting static file serving
 
 app.MapDefaultEndpoints();
 
