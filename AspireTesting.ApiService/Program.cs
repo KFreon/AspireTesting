@@ -23,16 +23,16 @@ app.MapGet("/api/data", async (MyDbContext dbContext) =>
 {
     await dbContext.Database.MigrateAsync();
 
-    var names = dbContext.MyNames.ToList();
+    var history = dbContext.TheHistory.ToList();
 
     var random = new Random();
     var randomNumber = random.Next();
 
-    var name = new MyEntity { Name = randomNumber.ToString() };
-    dbContext.MyNames.Add(name);
+    var historyItem = new MyHistory { RandomNumber = randomNumber.ToString() };
+    dbContext.TheHistory.Add(historyItem);
     dbContext.SaveChanges();
 
-    return new { randomNumber, names };
+    return new { randomNumber, history };
 }).WithName("Data");
 
 // Omitting static file serving

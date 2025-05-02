@@ -3,22 +3,22 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-interface MyData{
+interface TheHistory {
   randomNumber: number;
-  names: {id: number, name: string}[]
+  history: {id: number, randomNumber: string}[]
 }
 
 function App() {
   const [count, setCount] = useState(0)
   const [random, setRandom] = useState(0);
-  const [names, setNames] = useState<MyData['names']>([]);
+  const [history, setHistory] = useState<TheHistory['history']>([]);
 
   const getData = async () => {
     const response = await fetch('api/data');
-    const jsond: MyData = await response.json()
+    const jsond: TheHistory = await response.json()
 
     setRandom(jsond.randomNumber)
-    setNames(jsond.names)
+    setHistory(jsond.history)
   }
 
   useEffect(() =>{
@@ -48,7 +48,7 @@ function App() {
           <span>My server random number is: {random}</span>
         </p>
         <ul>
-          {names.map(x => <li key={x.id}>{x.name}</li>)}
+          {history.map(x => <li key={x.id}>{x.randomNumber}</li>)}
         </ul>
       </div>
       <p className="read-the-docs">
